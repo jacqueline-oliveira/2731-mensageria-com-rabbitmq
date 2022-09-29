@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PagamentoListener {
 
-    @RabbitListener(queues = "pagamento.concluido")
+    @RabbitListener(queues = "pagamentos.detalhes-pedido")
     public void recebeMensagem(@Payload PagamentoDto pagamento) {
         String mensagem = """
                 Dados do pagamento: %s

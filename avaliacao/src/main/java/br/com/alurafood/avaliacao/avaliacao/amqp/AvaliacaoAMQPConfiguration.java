@@ -1,4 +1,4 @@
-package br.com.alurafood.pedidos.amqp;
+package br.com.alurafood.avaliacao.avaliacao.amqp;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class PedidoAMQPConfiguration {
+public class AvaliacaoAMQPConfiguration {
     @Bean
     public Jackson2JsonMessageConverter messageConverter(){
         return  new Jackson2JsonMessageConverter();
@@ -31,9 +31,9 @@ public class PedidoAMQPConfiguration {
     }
 
     @Bean
-    public Queue filaDetalhesPedido() {
+    public Queue filaDetalhesAvaliacao() {
         return QueueBuilder
-                .nonDurable("pagamentos.detalhes-pedido")
+                .nonDurable("pagamentos.detalhes-avaliacao")
                 .build();
     }
 
@@ -47,7 +47,7 @@ public class PedidoAMQPConfiguration {
     @Bean
     public Binding bindPagamentoPedido(FanoutExchange fanoutExchange) {
         return BindingBuilder
-                .bind(filaDetalhesPedido())
+                .bind(filaDetalhesAvaliacao())
                 .to(fanoutExchange());
     }
 
